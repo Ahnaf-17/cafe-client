@@ -4,7 +4,8 @@ import menuImg from '../../assets/menu/banner3.jpg'
 import dessertImg from '../../assets/menu/dessert-bg.jpeg'
 import pizzaImg from '../../assets/menu/pizza-bg.jpg'
 import saladImg from '../../assets/menu/salad-bg.jpg'
-import PopularMenu from '../Home/PopularMenu';
+import soupImg from '../../assets/menu/soup-bg.jpg'
+// import PopularMenu from '../Home/PopularMenu';
 import useMenu from '../../Hooks/useMenu';
 import SectionTitle from '../../components/SectionTitle';
 import MenuCategory from './MenuCategory';
@@ -22,17 +23,19 @@ const Menu = () => {
                 <title>Cafe | menu</title>
             </Helmet>
             <Cover img={menuImg} title="Our menu"></Cover>
-            <SectionTitle 
-            subHeading={'Don`t miss'} heading={"Todays offer"}
+            <SectionTitle
+                subHeading={'Don`t miss'} heading={"Todays offer"}
             ></SectionTitle>
             {/* offered */}
             <MenuCategory items={offered}></MenuCategory>
             {/* dessert */}
-            <MenuCategory items={desserts} title="Dessert" img={dessertImg}></MenuCategory>
+            <MenuCategory items={desserts} title="dessert" img={dessertImg}></MenuCategory>
             {/* Pizza */}
-            <MenuCategory items={pizza} title={"Pizza"} img={pizzaImg}></MenuCategory>
+            <MenuCategory items={pizza} title={"pizza"} img={pizzaImg}></MenuCategory>
             {/* salad */}
-            <MenuCategory items={salad} title={"Salad"} img={saladImg}></MenuCategory>
+            <MenuCategory items={salad} title={"salad"} img={saladImg}></MenuCategory>
+            {/* soup */}
+            <MenuCategory items={soup} title={"soup"} img={soupImg}></MenuCategory>
 
 
 
