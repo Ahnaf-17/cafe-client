@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 import Category from "../Category/Category";
 import Banner from "../Shared/Banner/Banner";
 import Featured from "./Featured";
@@ -7,6 +8,9 @@ import Reviews from "./Reviews";
 const Home = () => {
     return (
         <div>
+            <Helmet>
+                <title>Fusion Cafe | Home</title>
+            </Helmet>
             <Banner></Banner>
             <Category></Category>
             <PopularMenu></PopularMenu>
