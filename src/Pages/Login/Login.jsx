@@ -1,9 +1,16 @@
-import { useEffect, useRef, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import { loadCaptchaEnginge, LoadCanvasTemplate, validateCaptcha } from 'react-simple-captcha';
+import { AuthContext } from '../../Providers/AuthProvider';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 
 
 const Login = () => {
+    const { logIn } = useContext(AuthContext)
+    const location = useLocation();
+    const navigate = useNavigate()
+
 
     const captchaRef = useRef(null)
     const [disabled,setDisabled] = useState(true)
@@ -17,6 +24,20 @@ const Login = () => {
         const email = form.email.value;
         const password = form.password.value;
         console.log(email,password);
+        logIn(email, password)
+        .then(result => {
+            console.log(result.user)
+            navigate(location?.state ? location.state : '/')
+        })
+        .catch(error => {
+            console.error(error)
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'incorrect password or email',
+                footer: '<a href="">Why do I have this issue?</a>'
+            })
+        })
     }
 
     const handleValidateCaptcha = () =>{
@@ -68,6 +89,7 @@ const Login = () => {
                             <input disabled={disabled} className="btn btn-primary" type="submit" value="LogIn" />
                         </div>
                     </form>
+                    <p><small>New here? <Link to='/signup'>Create an account</Link></small></p>
                 </div>
             </div>
         </div>
