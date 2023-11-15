@@ -17,7 +17,9 @@ const Navbar = () => {
         <li><Link to='/order/salad'>Order Food</Link></li>
         
         {
-            user? <><button onClick={handleLogOut} className="btn btn-active btn-link">LogOut</button>
+            user? <>
+            {user?.displayName}
+            <button onClick={handleLogOut} className="btn btn-active btn-link">LogOut</button>
             </> : <><li><Link to='/login'>LogIn</Link></li></>
         }
     </>
