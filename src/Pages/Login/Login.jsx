@@ -3,6 +3,7 @@ import { loadCaptchaEnginge, LoadCanvasTemplate, validateCaptcha } from 'react-s
 import { AuthContext } from '../../Providers/AuthProvider';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import { Helmet } from 'react-helmet-async';
 
 
 
@@ -49,6 +50,10 @@ const Login = () => {
         }
     }
     return (
+        <>
+        <Helmet>
+                <title>Fusion Cafe | Login</title>
+            </Helmet>
         <div className="hero min-h-screen bg-base-200">
             <div className="hero-content flex-col lg:flex-row-reverse">
                 <div className="text-center md:w-1/2 lg:text-left">
@@ -93,6 +98,7 @@ const Login = () => {
                 </div>
             </div>
         </div>
+        </>
     );
 };
 
