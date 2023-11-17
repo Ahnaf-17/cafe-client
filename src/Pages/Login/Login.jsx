@@ -11,6 +11,7 @@ const Login = () => {
     const { logIn } = useContext(AuthContext)
     const location = useLocation();
     const navigate = useNavigate()
+    const from = location.state?.from?.pathname || '/'
 
 
     const [disabled,setDisabled] = useState(true)
@@ -27,7 +28,7 @@ const Login = () => {
         logIn(email, password)
         .then(result => {
             console.log(result.user)
-            navigate(location?.state ? location.state : '/')
+            navigate(from)
         })
         .catch(error => {
             console.error(error)
@@ -90,7 +91,7 @@ const Login = () => {
                             {/* <button  className='btn btn-outline btn-xs mt-2'>Validate</button> */}
                         </div>
                         <div className="form-control mt-6">
-                            <input disabled={disabled} className="btn btn-primary" type="submit" value="LogIn" />
+                            <input disabled={false} className="btn btn-primary" type="submit" value="LogIn" />
                         </div>
                     </form>
                     <p><small>New here? <Link to='/signup'>Create an account</Link></small></p>
