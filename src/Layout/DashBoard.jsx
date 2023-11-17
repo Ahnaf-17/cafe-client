@@ -1,4 +1,4 @@
-import { FaCalendar, FaComment, FaHome, FaList, FaShoppingCart } from "react-icons/fa";
+import { FaCalendar, FaComment, FaHome, FaList, FaSearch, FaShoppingCart } from "react-icons/fa";
 import { NavLink, Outlet } from "react-router-dom";
 
 const DashBoard = () => {
@@ -36,9 +36,22 @@ const DashBoard = () => {
                         My Bookings
                         </NavLink>
                     </li>
+                    <div className="divider"></div>
+                    <li>
+                        <NavLink to='/'>
+                        <FaHome></FaHome>
+                        Home
+                        </NavLink>
+                    </li>
+                    <li>
+                        <NavLink to='/order/salad'>
+                        <FaSearch></FaSearch>
+                        Menu
+                        </NavLink>
+                    </li>
                 </ul>
             </div>
-            <div className="flex-1">
+            <div className="flex-1 p-10">
                 <Outlet></Outlet>
             </div>
         </div>
