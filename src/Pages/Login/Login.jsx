@@ -1,9 +1,11 @@
+/* eslint-disable no-unused-vars */
 import { useContext, useEffect, useState } from 'react';
 import { loadCaptchaEnginge, LoadCanvasTemplate, validateCaptcha } from 'react-simple-captcha';
 import { AuthContext } from '../../Providers/AuthProvider';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import { Helmet } from 'react-helmet-async';
+import SocialLogin from '../../components/SocialLogin';
 
 
 
@@ -94,7 +96,9 @@ const Login = () => {
                             <input disabled={false} className="btn btn-primary" type="submit" value="LogIn" />
                         </div>
                     </form>
-                    <p><small>New here? <Link to='/signup'>Create an account</Link></small></p>
+                    <SocialLogin></SocialLogin>
+                    <p className='px-6'><small>New here? <Link to='/signup'>Create an account</Link></small></p>
+                    
                 </div>
             </div>
         </div>

@@ -123,7 +123,7 @@ const Register = () => {
                                 <input className="btn btn-primary" type="submit" value="Register" />
                             </div>
                         </form>
-                        <p><small>Have and account? <Link to='/login'>Log in</Link></small></p>
+                        <p className="px-6"><small>Have and account? <Link to='/login'>Log in</Link></small></p>
                     </div>
                 </div>
             </div>
