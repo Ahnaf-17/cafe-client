@@ -1,12 +1,52 @@
-import { FaCalendar, FaComment, FaHome, FaList, FaSearch, FaShoppingCart } from "react-icons/fa";
+/* eslint-disable no-unused-vars */
+import { FaAd, FaBook, FaCalendar, FaComment, FaHome, FaList, FaMobileAlt, FaSearch, FaShoppingCart, FaUser, FaUsers, FaUtensils } from "react-icons/fa";
 import { NavLink, Outlet } from "react-router-dom";
+import useCart from "../Hooks/useCart";
 
 const DashBoard = () => {
+    const [cart] = useCart();
+    const isAdmin = true
     return (
         <div className="flex">
             <div className="w-64 min-h-screen bg-orange-400">
                 <ul className="menu p-4">
+                    {
+                        isAdmin ? 
+                        <>
                     <li>
+                        <NavLink to='/dashboard/adminHome'>
+                        <FaHome></FaHome>
+                        Admin Home
+                        </NavLink>
+                    </li>
+                    <li>
+                        <NavLink to='/dashboard/addItems'>
+                        <FaUtensils></FaUtensils>
+                        Add Items
+                        </NavLink>
+                    </li>
+                    <li>
+                        <NavLink to='/dashboard/manageItems'>
+                        <FaList></FaList>
+                        Manage Items
+                        </NavLink>
+                    </li>
+                    <li>
+                        <NavLink to='/dashboard/manageBookings'>
+                        <FaBook></FaBook>
+                        Manage Bookings
+                        </NavLink>
+                    </li>
+                    <li>
+                        <NavLink to='/dashboard/users'>
+                        <FaUsers></FaUsers>
+                        All Users
+                        </NavLink>
+                    </li>
+                        </>
+                        :
+                        <>
+                                            <li>
                         <NavLink to='/dashboard/userHome'>
                         <FaHome></FaHome>
                         User Home
@@ -21,7 +61,7 @@ const DashBoard = () => {
                     <li>
                         <NavLink to='/dashboard/cart'>
                         <FaShoppingCart></FaShoppingCart>
-                        My Cart
+                        My Cart({cart.length})
                         </NavLink>
                     </li>
                     <li>
@@ -36,6 +76,12 @@ const DashBoard = () => {
                         My Bookings
                         </NavLink>
                     </li>
+                        </>
+                    }
+
+
+
+                    {/* common links */}
                     <div className="divider"></div>
                     <li>
                         <NavLink to='/'>
@@ -47,6 +93,12 @@ const DashBoard = () => {
                         <NavLink to='/order/salad'>
                         <FaSearch></FaSearch>
                         Menu
+                        </NavLink>
+                    </li>
+                    <li>
+                        <NavLink to='/dashboard/contact'>
+                        <FaMobileAlt></FaMobileAlt>
+                        Contact
                         </NavLink>
                     </li>
                 </ul>
