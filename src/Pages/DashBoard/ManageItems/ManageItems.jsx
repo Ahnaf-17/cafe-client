@@ -1,12 +1,40 @@
 import { FaEdit, FaTrash } from "react-icons/fa";
 import useMenu from "../../../Hooks/useMenu";
 import SectionTitle from "../../../components/SectionTitle";
+import Swal from "sweetalert2";
+import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 
 const ManageItems = () => {
-    const handleDeleteItem = item =>{
 
+    const axiosSecure = useAxiosSecure()
+    const [menu,,refetch] = useMenu()
+    const handleDeleteItem =  (item) =>{
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+          }).then(async (result) => {
+            if (result.isConfirmed) {
+                const res = await axiosSecure.delete(`/menu/${item._id}`)
+                console.log(res.data);
+                if(res.data.deletedCount>0){
+                    refetch();
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "success",
+                        title: "Item has been removed",
+                        showConfirmButton: false,
+                        timer: 1500
+                      });
+                }
+
+            }
+          });
     }
-    const [menu] = useMenu()
     return (
         <div>
             <SectionTitle heading='manage all items' subHeading='hurry up'></SectionTitle>
