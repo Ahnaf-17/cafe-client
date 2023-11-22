@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import useCart from "../../../Hooks/useCart";
 import useAuth from "../../../Hooks/useAuth";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 const CheckOutForm = () => {
     const {user} = useAuth()
@@ -12,15 +14,18 @@ const CheckOutForm = () => {
     const stripe = useStripe()
     const elements = useElements()
     const axiosSecure = useAxiosSecure()
-    const [cart] = useCart()
+    const [cart,refetch] = useCart()
     const totalPrice = cart.reduce((total,item) => total+item.price,0)
+    const navigate = useNavigate()
 
     useEffect(()=>{
-        axiosSecure.post('/create-payment-intent',{price: totalPrice})
+        if(totalPrice>0){
+            axiosSecure.post('/create-payment-intent',{price: totalPrice})
         .then(res=>{
             console.log(res.data.clientSecret);
             setClientSecret(res.data.clientSecret)
         })
+        }
     },[axiosSecure, totalPrice])
 
 
@@ -77,6 +82,17 @@ const CheckOutForm = () => {
                 }
                 const res = await axiosSecure.post('/payments',payment)
                 console.log('payment saved',res.data);
+                refetch();
+                if(res.data?.paymentResult?.insertedId){
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "success",
+                        title: "Payment Successful",
+                        showConfirmButton: false,
+                        timer: 1000
+                      });
+                      navigate('/dashboard/paymentHistory')
+                }
 
             }
         }
